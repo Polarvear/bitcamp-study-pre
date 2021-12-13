@@ -7,20 +7,21 @@
 <body>
 <h1>현상수배</h1>
 <button type="button"><a href="form.html">등록</a></button>
+<button type="button" id="delete-btn">삭제</button>
 <table id="x-table" border="1">
-    <thead>
+<thead>
     <tr>
         <th>이름</th>
         <th>나이</th>
         <th>성별</th>
         <th>현상금</th>
     </tr>
-    </thead>
-    <tbody>
-    </tbody>
+</thead>
+<tbody>
+</tbody>
 </table>
 <script>
-    const tboyEle = document.querySelector('#x-table')
+    const tbodyEle = document.querySelector('#x-table tbody')
 
     fetch('/my/list')
       .then((response) =>{
@@ -30,15 +31,30 @@
           console.log(peopleInfo)
           for (const people of peopleInfo) {
               const info = people.split(',')
+              console.log(info)
               const tr = document.createElement('tr')
-              tr.innerHTMl = `<td>${info[0]}</td>
+              tr.innerHTML = `<td><a href="picture.html">${info[0]}</td></a>
                               <td>${info[1]}</td>
                               <td>${info[2]}</td>
-                              <td>${info[3]}</td>`
+                              <td>${info[3]}</td>
+                              <img src="img[0]">
+                              <button id="del-btn">삭제</button>`
+              tbodyEle.appendChild(tr)
+              document.querySelector('#del-btn').addEventListener('click', (e) => {
+                  const target = e.target
+                  target.remove()
+                  const stringify = JSON.stringify(info)
+                  console.log(typeof stringify)
+                  tbodyEle.removeChild(this.parentElement.parentElement)
 
-              tboyEle.appendChild(tr)
+
+              })
           }
       })
+
+
+
+
 </script>
 
 
