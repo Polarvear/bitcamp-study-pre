@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>현상수배</title>
+</head>
+<body>
+<h1>현상수배</h1>
+<button type="button"><a href="form.html">등록</a></button>
+<table id="x-table" border="1">
+    <thead>
+    <tr>
+        <th>이름</th>
+        <th>나이</th>
+        <th>성별</th>
+        <th>현상금</th>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+<script>
+    const tboyEle = document.querySelector('#x-table')
+
+    fetch('/my/list')
+      .then((response) =>{
+          return response.json()
+      })
+      .then((peopleInfo) => {
+          console.log(peopleInfo)
+          for (const people of peopleInfo) {
+              const info = people.split(',')
+              const tr = document.createElement('tr')
+              tr.innerHTMl = `<td>${info[0]}</td>
+                              <td>${info[1]}</td>
+                              <td>${info[2]}</td>
+                              <td>${info[3]}</td>`
+
+              tboyEle.appendChild(tr)
+          }
+      })
+</script>
+
+
+
+
+</body>
+</html>
