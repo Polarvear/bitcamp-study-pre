@@ -33,7 +33,7 @@
               const info = people.split(',')
               console.log(info)
               const tr = document.createElement('tr')
-              tr.innerHTML = `<td><a href="picture.html">${info[0]}</td></a>
+              tr.innerHTML = `<td data-idx>${info[0]}</td>
                               <td>${info[1]}</td>
                               <td>${info[2]}</td>
                               <td>${info[3]}</td>
@@ -42,12 +42,8 @@
               tbodyEle.appendChild(tr)
               document.querySelector('#del-btn').addEventListener('click', (e) => {
                   const target = e.target
-                  target.remove()
-                  const stringify = JSON.stringify(info)
-                  console.log(typeof stringify)
-                  tbodyEle.removeChild(this.parentElement.parentElement)
-
-
+                  const idx = target.getAttribute('data-idx')
+                  console.log(typeof info)
               })
           }
       })

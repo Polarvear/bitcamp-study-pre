@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <title>게시판</title>
+</head>
+<body>
+
+<h1>게시판입니다.</h1>
+
+<form>
+    제목: <input id="x-title" type="text " palceholder="제목을 입력해주세요"><br>
+    내용: <textarea id="x-content" type="text" palceholder="내용을 입력해주세요." cols="60" rows="5"></textarea><br>
+    조회수: <input id="x-view" type="number"><br>
+    게시일: <input id="x-date" value="2021-12-29" readonly><br>
+    제목과 내용은 필수 입력항목입니다.
+    <button id="x-add-btn" type="button">등록</button>
+    <button id="x-cancel-btn" type="button"><a href="index.html">등록취소</a></button>
+</form>
+
+<script type="text/javascript">
+    const xTitle = document.querySelector("#x-title");
+    const xContent = document.querySelector("#x-content");
+    const xView = document.querySelector("#x-view");
+    const xDate = document.querySelector("#x-date");
+
+    document.querySelector("#x-add-btn").onclick = () => {
+            if (xTitle.value === "" || xContent.value === ""|| xView.value < 0 || confirm("등록하시겠습니까?") === false)  {
+            window.alert("등록에 실패했습니다.");
+            return;
+        }
+
+        fetch(`/contact/add?name=${xTitle.value}&email=${xContent.value}&tel=${xView.value}&company=${xDate.value}`)
+            .then(function(response) {
+                return response.text();
+            })
+            .then(function(text) {
+                console.log(text);
+                location.href = "Board/index.html";
+            });
+    };
+
+</script>
+
+</body>
+</html>
