@@ -29,18 +29,25 @@
         })
         .then(function(contacts) {
             console.log(contacts);
-            for (var contact of contacts) {
-                const result = contact.split(",")
-                var tr = document.createElement("tr");
-                tr.innerHTML = `<td>${contact.name}</td>
-                                <td>${contact.email}</td>
-                                <td>${contact.tel}</td>
-                                <td>${contact.company}</td>
-                                <button id="del-btn">삭제</button>`;
+            for (const contant of contacts) {
+                const result = contant.split(' , ')
+                const tr = document.createElement("tr")
+                // tr.setAttribute('data-no', 'value')
+                tr.innerHTML = `<td id="x-td">${result[0]}</td>
+                                <td>${result[1]}</td>
+                                <td>${result[2]}</td>
+                                <td>${result[3]}</td>
+                                <button id="x-del-btn">삭제</button>`
                 tbody.appendChild(tr);
+                const delBtn = document.querySelector('#x-del-btn')
+                delBtn.addEventListener('click', (e) => {
+                const tdEle = document.querySelector('#x-td')
+                    tdEle.remove()
+
+                })
+
             }
         });
-
 
 </script>
 
